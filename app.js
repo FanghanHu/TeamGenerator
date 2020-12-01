@@ -15,6 +15,7 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 let employees = [];
+let usedIds = [];
 
 function promptQuestions() {
     inquirer.prompt([
@@ -26,21 +27,47 @@ function promptQuestions() {
         }
     ]).then(response => {
 
+        // noinspection JSUnusedGlobalSymbols
         let questions = [
             {
                 type: 'input',
                 name: 'name',
-                message: "What is this teammate's name?"
+                message: "What is this teammate's name?",
+                validate: value => {
+                    if(value.match(/[a-z|\d]+/gs)) {
+                        return true;
+                    } else {
+                        return "Please enter an valid name";
+                    }
+                }
             },
             {
                 type: 'input',
                 name: 'id',
-                message: "What is this teammate's id?"
+                message: "What is this teammate's id?",
+                validate: input => {
+                    if(!usedIds.includes(input)) {
+                        if(input > 0) {
+                            return true;
+                        } else {
+                            return "Id must be a number that is greater than 0";
+                        }
+                    } else {
+                        return "Id has already been used";
+                    }
+                }
             },
             {
                 type: 'input',
                 name: 'email',
-                message: "What is this teammate's email?"
+                message: "What is this teammate's email?",
+                validate: value => {
+                    if(value.match(/[a-z|\d]+@[a-z|\d]+\.[a-z|\d]+/gs)) {
+                        return true;
+                    } else {
+                        return "Please enter an valid email";
+                    }
+                }
             }
         ];
 
@@ -50,21 +77,42 @@ function promptQuestions() {
                 questions.push({
                     type: 'input',
                     name: 'officeNumber',
-                    message: "What is this teammate's office number?"
+                    message: "What is this teammate's office number?",
+                    validate: value => {
+                        if(value.match(/\d+/gs)) {
+                            return true;
+                        } else {
+                            return "Please enter an valid phone number(numbers only, no dash)";
+                        }
+                    }
                 },);
                 break;
             case 'engineer':
                 questions.push({
                     type: 'input',
                     name: 'github',
-                    message: "What is this teammate's github?"
+                    message: "What is this teammate's github?",
+                    validate: value => {
+                        if(value.match(/[a-z|\d]+/gs)) {
+                            return true;
+                        } else {
+                            return "Please enter an valid username";
+                        }
+                    }
                 },);
                 break;
             case 'intern':
                 questions.push({
                     type: 'input',
                     name: 'school',
-                    message: "What is this teammate's school?"
+                    message: "What is this teammate's school?",
+                    validate: value => {
+                        if(value.match(/[a-z|\d]+/gs)) {
+                            return true;
+                        } else {
+                            return "Please enter an valid school name";
+                        }
+                    }
                 },);
                 break;
             case "No more":
@@ -82,6 +130,7 @@ function promptQuestions() {
         inquirer.prompt(questions).then(answers => {
             let {name, id, email} = answers;
             let commonFields = [name, id, email];
+            usedIds.push(id);
             // noinspection JSUnresolvedVariable
             switch (response.choice) {
                 case 'manager':
