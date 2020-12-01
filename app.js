@@ -34,7 +34,7 @@ function promptQuestions() {
                 name: 'name',
                 message: "What is this teammate's name?",
                 validate: value => {
-                    if(value.match(/[a-z|\d]+/gs)) {
+                    if(value.match(/[a-zA-Z\d]+/gs)) {
                         return true;
                     } else {
                         return "Please enter an valid name";
@@ -62,7 +62,7 @@ function promptQuestions() {
                 name: 'email',
                 message: "What is this teammate's email?",
                 validate: value => {
-                    if(value.match(/[a-z|\d]+@[a-z|\d]+\.[a-z|\d]+/gs)) {
+                    if(value.match(/[a-zA-Z\d]+@[a-z|\d]+\.[a-z|\d]+/gs)) {
                         return true;
                     } else {
                         return "Please enter an valid email";
@@ -93,7 +93,7 @@ function promptQuestions() {
                     name: 'github',
                     message: "What is this teammate's github?",
                     validate: value => {
-                        if(value.match(/[a-z|\d]+/gs)) {
+                        if(value.match(/[a-zA-Z\d]+/gs)) {
                             return true;
                         } else {
                             return "Please enter an valid username";
@@ -107,7 +107,7 @@ function promptQuestions() {
                     name: 'school',
                     message: "What is this teammate's school?",
                     validate: value => {
-                        if(value.match(/[a-z|\d]+/gs)) {
+                        if(value.match(/[a-zA-Z\d]+/gs)) {
                             return true;
                         } else {
                             return "Please enter an valid school name";
