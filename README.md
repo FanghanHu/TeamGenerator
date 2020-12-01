@@ -2,6 +2,8 @@
 
 This program will prompt questions about your team then generate a styled html page depends on your input.
 
+
+
 ![cover](./assets/cover.png)
 
 ## Table of contents
@@ -16,6 +18,8 @@ Please clone this project, it is not published on npm.
 
 ## Usages
 node app
+
+Video: https://www.youtube.com/watch?v=AGwnLydVSlM
 
 ## Testing Instructions
 npm run test
